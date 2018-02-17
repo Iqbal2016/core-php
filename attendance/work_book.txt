@@ -1,0 +1,30 @@
+HTML:
+<form method="" action="">
+	Username: <input type="text" name="username" value="" />
+	Passwword: <input type="password" name="username" value="" />
+		<input type="submit" name="login" value="Login" />
+</form>
+
+SQL:
+CREATE TABLE IF NOT EXISTS `punchio` (
+  `empID` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `in` varchar(8) DEFAULT NULL,
+  `incomment` varchar(255) DEFAULT NULL,
+  `out` varchar(8) DEFAULT NULL,
+  `outcomment` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+PHP:
+<?php
+$username = $_POST['username'];
+$password = MD5($_POST['password']);
+
+$result = mysql_query("SELECT * FROM `users` WHERE `username` = '$username' AND `password` = '$password' ");
+$row = mysql_fetch_object($query);
+
+@session_start();
+$_SESSION['empID'] =$row->empID;
+$_SESSION['username'] =$row->username;
+
+?>
